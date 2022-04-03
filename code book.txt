@@ -1,0 +1,66 @@
+In the run_analysis.R file:
+1. Download dataset:
+  - store the download link in fileUrlC3 
+  - save the file with filename "C3-project.zip"
+
+2. Load data
+  - activities: 
+    - load activity_labels.txt 
+    - 6 rows, 2 columns
+    - list of 6 activities 
+  - features: 
+    - load features.txt
+    - 561 rows, 2 columns
+    - list of all features/functions
+  - subject_test:
+    - load test/subject_test.txt 
+    - 2947 rows, 1 column
+    - list of 9 out of 30 voluteers 
+  - subject_train: 
+    - load train/subject_train.txt 
+    - 7352 rows, 1 column
+    - list of 21 out of 30 voluteers
+  - x_test: 
+    - load test/x_train.txt
+    - 2947 rows, 561 columns
+    - list of features of test data
+  - y_test: 
+    - load test/y_train.txt
+    - 2947 rows, 1 columns
+    - list of activity code of test data
+  - x_train: 
+    - load train/x_train.txt
+    - 7352 rows, 561 columns
+    - list of features of train data
+  - y_train:  
+    - load train/y_train.txt
+    - 7352 rows, 1 columns
+    - list of activity code of train data
+
+3. Merges the training and the test sets to create one data set.
+  - merge x_test and x_train and save into xdata, 10299 rows, 561 columns
+  - merge y_test and y_train and save into ydata, 10299 rows, 561 columns
+  - merge subject_test and subject_train and save into suject data, 10299 rows, 1 column
+  - merge xdata, ydata and subject data and all save into mergedData, 10299 rows, 563 column
+
+4. Extracts only the measurements on the mean and standard deviation for each measurement. 
+  - select subject, code and column name contains either "mean" or "std" words and save into extractedData, 10299 rows, 88 columns
+
+5. Uses descriptive activity names to name the activities in the data set.
+  - join activities with extractedData by code and replace the extractedData, 10299 rows, 89 columns
+
+6. Appropriately labels the data set with descriptive variable names.
+  - code column renamed to activityCode
+  - replace t character at the beginning of all column names with Time
+  - replace f character at the beginning of all column names with Frequency
+  - replace Acc in all column names with Accelerometer
+  - replace Gyro in all column names with Gyroscope
+  - replace Mag in all column names with Magnitude
+  - replace BodyBody in all column names with Body
+  - replace gravity in all column names with Gravity
+  - replace angle in all column names with Angle
+  - replace tBody in all column names with TimeBody
+
+7. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+  - group extractedData by subject, activity code and activity and calculate the average number for each variable and save into finalData, 180 rows and 89 columns
+  - export finalData into finalData.txt file
